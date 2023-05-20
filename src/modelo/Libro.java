@@ -3,6 +3,9 @@ package modelo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import excepciones.CampoVacioException;
+import excepciones.IsbnException;
+
 public class Libro {
 	String titulo,autor,editorial,isbn;
 	private boolean prestado;
@@ -16,7 +19,7 @@ public class Libro {
 	
 
 	public Libro(String titulo, String autor, String editorial, String prestado, String fechaPrestamo,
-			String fechaDevolucion,String isbn) {
+			String fechaDevolucion,String isbn) throws CampoVacioException, IsbnException {
 		/*
 		super();
 		this.titulo = titulo;
@@ -44,9 +47,9 @@ public class Libro {
 	}
 
 
-	public void setTitulo(String titulo) {
+	public void setTitulo(String titulo) throws CampoVacioException {
 		if(titulo.isEmpty()) {
-			
+			throw new CampoVacioException();
 		}
 		else {
 			this.titulo = titulo;
@@ -59,9 +62,9 @@ public class Libro {
 	}
 
 
-	public void setAutor(String autor) {
+	public void setAutor(String autor) throws CampoVacioException {
 		if(autor.isEmpty()) {
-			
+			throw new CampoVacioException();
 		}
 		else {
 			this.autor = autor;
@@ -74,9 +77,9 @@ public class Libro {
 	}
 
 
-	public void setEditorial(String editorial) {
+	public void setEditorial(String editorial) throws CampoVacioException {
 		if(editorial.isEmpty()) {
-			
+			throw new CampoVacioException();
 		}
 		else {
 			this.editorial = editorial;
@@ -89,15 +92,15 @@ public class Libro {
 	}
 
 
-	public void setIsbn(String isbn) {
+	public void setIsbn(String isbn) throws CampoVacioException, IsbnException {
 		if(isbn.isEmpty()) {
-			
+			throw new CampoVacioException();
 		}
 		if(compruebaIsbn(isbn)) {
 			this.isbn = isbn;
 		}
 		else {
-			
+			throw new IsbnException();
 		}
 		
 	}
@@ -155,8 +158,13 @@ public class Libro {
 	}
 
 
-	public void setPrestado(String prestado) {
-		this.prestado = Boolean.parseBoolean(prestado);
+	public void setPrestado(String prestado) throws CampoVacioException {
+		if(prestado.isEmpty()) {
+			throw new CampoVacioException();
+		}
+		else {
+			this.prestado = Boolean.parseBoolean(prestado);
+		}
 	}
 
 
@@ -165,8 +173,13 @@ public class Libro {
 	}
 
 
-	public void setFechaPrestamo(String fechaPrestamo) {
-		this.fechaPrestamo = LocalDate.parse(fechaPrestamo);
+	public void setFechaPrestamo(String fechaPrestamo) throws CampoVacioException {
+		if(fechaPrestamo.isEmpty()) {
+			throw new CampoVacioException();
+		}
+		else {
+			this.fechaPrestamo = LocalDate.parse(fechaPrestamo);
+		}
 	}
 
 
@@ -175,8 +188,14 @@ public class Libro {
 	}
 
 
-	public void setFechaDevolucion(String fechaDevolucion) {
-		this.fechaDevolucion = LocalDate.parse(fechaDevolucion);
+	public void setFechaDevolucion(String fechaDevolucion) throws CampoVacioException {
+		if(fechaDevolucion.isEmpty()) {
+			throw new CampoVacioException();
+		}
+		else {
+			this.fechaDevolucion = LocalDate.parse(fechaDevolucion);
+		}
+		
 	}
 
 
