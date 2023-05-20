@@ -33,11 +33,13 @@ public class Main {
 		boolean sigue=true;
 		String opcion="";
 		do {
-			System.out.println("CONSULTA A TODA LA BBDD");
-			System.out.println("AÑADIR A LA BBDD");
-			System.out.println("ELIMINAR A LA BBDD");
-			System.out.println("FILTRADO A LA BBDD");
-			System.out.println("APAGAR");
+			System.out.println("1.-CONSULTA A TODA LA BBDD");
+			System.out.println("2.-AÑADIR A LA BBDD");
+			System.out.println("3.-ELIMINAR A LA BBDD");
+			System.out.println("4.-FILTRADO A LA BBDD");
+			System.out.println("5.-PRESTAR LIBRO EN LA BBDD");
+			System.out.println("6.-APAGAR");
+			System.out.println("");
 			
 			opcion=leer.next();
 			
@@ -92,10 +94,27 @@ public class Main {
 			break;
 			
 			case "4":
-				
+				dbc = new DbConnection();
+				conn=dbc.getConnection();
+				controler=new LibroControler(conn);
+				String campo="prestado";
+				String campoBuscado="1";
+				sql="select * from libros where "+campo+" ='"+campoBuscado+"'";
+				try {
+					List <Libro> biblio=controler.getConsulta(sql);
+					mostrar(biblio);
+				} catch (SQLException | CampoVacioException | IsbnException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
+				dbc.disconect();
 			break;
 			
 			case "5":
+				
+			break;
+			
+			case "6":
 				sigue=false;
 			break;
 			}
