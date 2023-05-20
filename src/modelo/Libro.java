@@ -7,7 +7,7 @@ import excepciones.CampoVacioException;
 import excepciones.IsbnException;
 
 public class Libro {
-	String titulo,autor,editorial,isbn;
+	private String titulo,autor,editorial,isbn;
 	private boolean prestado;
 	private LocalDate fechaPrestamo,fechaDevolucion;
 	private LocalDateTime fechaAlta;
@@ -20,17 +20,7 @@ public class Libro {
 
 	public Libro(String titulo, String autor, String editorial, String prestado, String fechaPrestamo,
 			String fechaDevolucion,String isbn) throws CampoVacioException, IsbnException {
-		/*
-		super();
-		this.titulo = titulo;
-		this.autor = autor;
-		this.editorial = editorial;
-		this.isbn = isbn;
-		this.prestado = prestado;
-		this.fechaPrestamo = fechaPrestamo;
-		this.fechaDevolucion = fechaDevolucion;
-		this.fechaAlta = fechaAlta;
-		*/
+		
 		this.setTitulo(titulo);
 		this.setAutor(autor);
 		this.setEditorial(editorial);
@@ -39,6 +29,20 @@ public class Libro {
 		this.setFechaDevolucion(fechaDevolucion);
 		this.setIsbn(isbn);
 		this.fechaAlta=LocalDateTime.now();
+	}
+
+
+	public Libro(String titulo, String autor, String editorial, boolean prestado, LocalDate fechaPrestamo,
+			LocalDate fechaDevolucion, String isbn, LocalDateTime fechaAlta) throws CampoVacioException, IsbnException {
+		// TODO Auto-generated constructor stub
+		this.setTitulo(titulo);
+		this.setAutor(autor);
+		this.setEditorial(editorial);
+		this.prestado=prestado;
+		this.fechaPrestamo=fechaPrestamo;
+		this.fechaDevolucion=fechaDevolucion;
+		this.setIsbn(isbn);
+		this.fechaAlta=fechaAlta;
 	}
 
 
@@ -93,9 +97,6 @@ public class Libro {
 
 
 	public void setIsbn(String isbn) throws CampoVacioException, IsbnException {
-		if(isbn.isEmpty()) {
-			throw new CampoVacioException();
-		}
 		if(compruebaIsbn(isbn)) {
 			this.isbn = isbn;
 		}
