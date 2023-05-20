@@ -45,12 +45,7 @@ public class Main {
 			case "1":
 				Connection conn;
 				DbConnection dbc=null;
-				try {
-					dbc = new DbConnection();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					System.out.println(e.getMessage());
-				}
+				dbc = new DbConnection();
 				conn=dbc.getConnection();
 				LibroControler controler=new LibroControler(conn);
 				String sql="select * from libros";
@@ -61,10 +56,23 @@ public class Main {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
 				}
+				dbc.disconect();
 			break;
 			
 			case "2":
-				
+				String titulo="El fubo ha muerto",autor="Alejandro Gemes",editorial="AGR Studio",isbn="978-84-204-4290-7";
+				dbc = new DbConnection();
+				conn=dbc.getConnection();
+				controler=new LibroControler(conn);
+				try {
+					if(controler.añadirLibro(titulo,autor,editorial,isbn)) {
+						List <Libro> biblio=controler.getBiblio();
+						mostrar(biblio);
+					}
+				} catch (CampoVacioException | IsbnException | SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
 			break;
 				
 			case "3":

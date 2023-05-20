@@ -12,10 +12,15 @@ public class DbConnection {
 	private static String url="jdbc:mysql://localhost:3309/"+bd+parametros;
 	private Connection conn;
 	
-	public DbConnection() throws SQLException {
+	public DbConnection()  {
 		// TODO Auto-generated constructor stub
 		
-			conn=DriverManager.getConnection(url,user,pass);
+			try {
+				conn=DriverManager.getConnection(url,user,pass);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("La conexion se realizo con exito");
 		
 	}
@@ -23,10 +28,15 @@ public class DbConnection {
 	public Connection getConnection() {
 		return conn;
 	}
-	public void disconect() throws SQLException {
+	public void disconect()  {
 		if(conn!=null) {
 			System.out.println("Cerrando BBDD");
-			conn.close();
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("BBDD desconectada");
 		}
 	}

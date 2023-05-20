@@ -1,9 +1,12 @@
 package dao;
 
+
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -42,6 +45,41 @@ public class LibroDao {
 			librito=null;
 		}
 		return biblio;
+		
+	}
+	
+	public boolean añadirLibro(Libro librito) throws SQLException {
+		boolean agregado=false;
+		String sql="insert into libros values (?,?,?,?,?,?,?,?,?)";
+		PreparedStatement pst=conn.prepareStatement(sql);
+		
+		
+		String titulo=librito.getTitulo();
+		String autor=librito.getAutor();
+		String editorial=librito.getEditorial();
+		String isbn=librito.getIsbn();
+		boolean prestado=librito.isPrestado();
+		LocalDate fechaPrestamoLD=librito.getFechaPrestamo();
+		Date fechaPrestamo=Date.valueOf(fechaPrestamoLD);
+		LocalDate fechaDevolucionLD=librito.getFechaDevolucion();
+		Date fechaDevolucion=Date.valueOf(fechaDevolucionLD);
+		LocalDateTime fechaAltaLDT=librito.getFechaAlta();
+		Timestamp fechaAlta=Timestamp.valueOf(fechaAltaLDT);
+		
+		pst.setInt(1, 0);
+		pst.setString(2, titulo);
+		pst.setString(3, autor);
+		pst.setString(4, editorial);
+		pst.setBoolean(5, prestado);
+		pst.setDate(6, fechaPrestamo);
+		pst.setDate(7, fechaDevolucion);
+		pst.setString(8, isbn);
+		pst.setTimestamp(9, fechaAlta);
+		
+		pst.executeUpdate();
+		
+		agregado=true;
+		return agregado;
 		
 	}
 }

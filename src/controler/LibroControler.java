@@ -17,11 +17,22 @@ public class LibroControler {
 		// TODO Auto-generated constructor stub
 		this.conn=conn;
 	}
+	
+	public List<Libro> getBiblio() {
+		return biblio;
+	}
+
 	public List<Libro> getConsulta(String sql) throws SQLException, CampoVacioException, IsbnException{
 		
 		LibroDao dao=new LibroDao(conn);
-		
 		return dao.getConsulta(sql);
+	}
+	public boolean añadirLibro(String titulo, String autor, String editorial, String isbn) throws CampoVacioException, IsbnException, SQLException {
+		boolean agregado=false;
+		Libro librito=new Libro(titulo, autor, editorial,isbn);
+		LibroDao dao=new LibroDao(conn);
+		agregado=dao.añadirLibro(librito);
+		return agregado;
 		
 	}
 

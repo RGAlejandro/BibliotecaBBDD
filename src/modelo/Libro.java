@@ -46,6 +46,19 @@ public class Libro {
 	}
 
 
+	public Libro(String titulo, String autor, String editorial, String isbn) throws CampoVacioException, IsbnException {
+		// TODO Auto-generated constructor stub
+		this.setTitulo(titulo);
+		this.setAutor(autor);
+		this.setEditorial(editorial);
+		this.prestado=false;
+		this.fechaPrestamo=LocalDate.now();
+		this.fechaDevolucion=LocalDate.now().plusDays(7);
+		this.setIsbn(isbn);
+		this.fechaAlta=LocalDateTime.now();
+	}
+
+
 	public String getTitulo() {
 		return titulo;
 	}
