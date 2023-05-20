@@ -94,4 +94,23 @@ public class LibroDao {
 		return eliminado;
 		
 	}
+	public boolean prestarLibro(String isbn) throws SQLException {
+		boolean cambiado=false;
+		String sql="Update libros Set prestado=? , fechaPrestamo=? , fechaDevolucion=? where isbn=?";
+		PreparedStatement pst=conn.prepareStatement(sql);
+		LocalDate fechaPrestamoLD=LocalDate.now();
+		LocalDate fechaDevolucionLD=LocalDate.now().plusDays(10);
+		Date fechaPrestamo=Date.valueOf(fechaPrestamoLD);
+		Date fechaDevolucion=Date.valueOf(fechaDevolucionLD);
+
+		pst.setBoolean(1, true);
+		pst.setDate(2, fechaPrestamo);
+		pst.setDate(3, fechaDevolucion);
+		pst.setString(4, isbn);
+		pst.executeUpdate();
+		
+		cambiado=true;
+		return cambiado;
+		
+	}
 }

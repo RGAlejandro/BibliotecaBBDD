@@ -111,6 +111,18 @@ public class Main {
 			break;
 			
 			case "5":
+				dbc = new DbConnection();
+				conn=dbc.getConnection();
+				controler=new LibroControler(conn);
+				isbn="978-84-204-4290-7";
+				try {
+					if(controler.prestarLibro(isbn)) {
+						System.out.println("Libro prestado");
+					}
+				} catch (SQLException | CampoVacioException | IsbnException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
 				
 			break;
 			

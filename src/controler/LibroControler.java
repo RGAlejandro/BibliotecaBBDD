@@ -44,5 +44,19 @@ public class LibroControler {
 		return eliminado;
 		
 	}
+	public boolean prestarLibro(String isbn) throws SQLException, CampoVacioException, IsbnException {
+		boolean cambiado=false;
+		LibroDao dao=new LibroDao(conn);
+		String campo="isbn";
+		String sql="select * from libros where "+campo+" ='"+isbn+"'";
+		List <Libro> biblio=dao.getConsulta(sql);
+		
+		if(biblio.size()!=0&&!biblio.get(0).isPrestado()) {
+			cambiado=dao.prestarLibro(isbn);
+		}
+		
+		return cambiado;
+		
+	}
 
 }
