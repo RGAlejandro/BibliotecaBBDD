@@ -35,5 +35,14 @@ public class LibroControler {
 		return agregado;
 		
 	}
+	public boolean eliminarLibro(String isbn) throws SQLException {
+		boolean eliminado=false;
+		LibroDao dao=new LibroDao(conn);
+		eliminado=dao.eliminarLibro(isbn);
+		
+		
+		return eliminado;
+		
+	}
 
 }

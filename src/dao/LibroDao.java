@@ -82,4 +82,16 @@ public class LibroDao {
 		return agregado;
 		
 	}
+	public boolean eliminarLibro(String isbn) throws SQLException {
+		boolean eliminado=false;
+		String campo="isbn";
+		String cadenaBuscada=isbn;
+		String sql="delete from libros where "+campo+"= '"+cadenaBuscada+"'";
+		PreparedStatement pst=conn.prepareStatement(sql);
+		pst.executeUpdate();
+		
+		eliminado=true;
+		return eliminado;
+		
+	}
 }

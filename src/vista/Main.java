@@ -66,8 +66,9 @@ public class Main {
 				controler=new LibroControler(conn);
 				try {
 					if(controler.añadirLibro(titulo,autor,editorial,isbn)) {
-						List <Libro> biblio=controler.getBiblio();
-						mostrar(biblio);
+						//List <Libro> biblio=controler.getBiblio();
+						//mostrar(biblio);
+						System.out.println("Libro Añadido...");
 					}
 				} catch (CampoVacioException | IsbnException | SQLException e) {
 					// TODO Auto-generated catch block
@@ -76,7 +77,18 @@ public class Main {
 			break;
 				
 			case "3":
-				
+				dbc = new DbConnection();
+				conn=dbc.getConnection();
+				controler=new LibroControler(conn);
+				isbn="978-84-204-4290-7";
+				try {
+					if(controler.eliminarLibro(isbn)) {
+						System.out.println("Libro Eliminado...");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
 			break;
 			
 			case "4":
